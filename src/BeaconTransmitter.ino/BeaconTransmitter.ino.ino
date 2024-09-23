@@ -16,18 +16,18 @@
 #include <bluefruit.h>
 
 // Pin definition for the ULPSM-O3 968-046 sensor's gas voltage output
-#define VGAS 5
+#define PIN_VGAS 5
 // Pin definition for the ULPSM-O3 968-046 sensor's reference voltage output
-#define VREF 28
+#define PIN_VREF 28
 // Pin definition for the ULPSM-O3 968-046 sensor's temperature voltage output
-#define VTEMP 29
+#define PIN_VTEMP 29
 
 // Sensitivity code from the sensor label, this changes between sensors
 const float SENSITIVITY_CODE = -35.35;
 // Gain for ozone sensor, this is always the same no matter what for this sensor
 const float TIA_GAIN = 499;
 // Calculated m value for ozone concentration calculation from the sensor's datasheet
-const float m = SENSITIVITY_CODE * TIA_GAIN * 1e9 * 1e-3;
+const float m = SENSITIVITY_CODE * TIA_GAIN * 1e-9 * 1e3;
 
 // UUID for the Bluetooth beacon
 const uint8_t beaconUUID[16] = {
@@ -63,13 +63,11 @@ void setup() {
     Serial.println("Setting Device Name to ManusBeacon");
     Bluefruit.setName("ManusBeacon");
     Bluefruit.ScanResponse.addName();
-    
-    startAdvertising();
-
+  
     // Initialize analog pins for sensor reading
-    pinMode(VGAS, INPUT);
-    pinMode(VREF, INPUT);
-    pinMode(VTEMP, INPUT);
+    pinMode(PIN_VGAS, INPUT);
+    pinMode(PIN_VREF, INPUT);
+    pinMode(PIN_VTEMP, INPUT);
 }
 
 /**
@@ -78,7 +76,7 @@ void setup() {
  * This function configures and starts the Bluetooth advertising process,
  * setting up the device as a beacon with the specified UUID.
  */
-void startAdvertising() {
+void startAdvertising(SensorData sensorData) {
     Bluefruit.Advertising.stop();
     
     Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
@@ -87,7 +85,7 @@ void startAdvertising() {
     Serial.println("Setting Device UUID to MANU-EPSG-GTI-3A");
     Bluefruit.Advertising.addName();
 
-    BLEBeacon elBeacon(beaconUUID, 12, 34, 73);
+    BLEBeacon elBeacon(beaconUUID, sensorData.ozonePPM, sensorData.temperature, 73);
     elBeacon.setManufacturer(0x004c); // Apple ID
     Bluefruit.Advertising.setBeacon(elBeacon);
     
@@ -107,9 +105,9 @@ void startAdvertising() {
  * calculates the ozone concentration and temperature, and returns the data.
  */
 SensorData readSensor() {
-    float vgas = analogRead(VGAS) * (3.3 / 1023.0);
-    float vref = analogRead(VREF) * (3.3 / 1023.0);
-    float vtemp = analogRead(VTEMP) * (3.3 / 1023.0);
+    float vgas = analogRead(PIN_VGAS) * (3.3 / 4096);
+    float vref = analogRead(PIN_VREF) * (3.3 / 4096);
+    float vtemp = analogRead(PIN_VTEMP) * (3.3 / 4096);
 
     SensorData data;
     data.ozonePPM = calculateOzone(vgas, vref);
@@ -137,7 +135,7 @@ float calculateOzone(float vgas, float vref) {
  * based on the specific characteristics of the temperature sensor.
  */
 float calculateTemperature(float vtemp) {
-    return (vtemp - 0.5) * 100;
+    return vtemp; // I have to still calibrate the temperature measurements
 }
 
 /**
@@ -155,6 +153,8 @@ void loop() {
     Serial.print("Temperature: ");
     Serial.print(sensorData.temperature);
     Serial.println(" °C");
+    
+    startAdvertising(sensorData);
     
     delay(1000);
 }
