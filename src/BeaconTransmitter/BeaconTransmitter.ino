@@ -39,9 +39,11 @@ const uint8_t beaconUUID[16] = {
  * @brief Struct to hold sensor measurements
  */
 struct SensorData {
-    float ozonePPM;    // Ozone concentration in parts per million
-    float temperature; // Temperature in degrees Celsius
+    int ozonePPM;    // Ozone concentration in parts per million
+    int temperature; // Temperature in degrees Celsius
 };
+
+SensorData sensorData;
 
 /**
  * @brief Setup function to initialize the device
@@ -63,7 +65,11 @@ void setup() {
     Serial.println("Setting Device Name to ManusBeacon");
     Bluefruit.setName("ManusBeacon");
     Bluefruit.ScanResponse.addName();
-  
+    
+    sensorData = readSensor();
+
+    startAdvertising(sensorData);
+
     // Initialize analog pins for sensor reading
     pinMode(PIN_VGAS, INPUT);
     pinMode(PIN_VREF, INPUT);
@@ -120,10 +126,10 @@ SensorData readSensor() {
  * @brief Calculate ozone concentration
  * @param vgas Gas voltage from the sensor
  * @param vref Reference voltage from the sensor
- * @return float Ozone concentration in parts per million (ppm)
+ * @return int Ozone concentration in parts per million (ppm)
  */
-float calculateOzone(float vgas, float vref) {
-    return (vgas - vref) / m;
+int calculateOzone(float vgas, float vref) {
+    return int(50 - ((vgas - vref) / m));
 }
 
 /**
@@ -134,8 +140,8 @@ float calculateOzone(float vgas, float vref) {
  * @note This is a placeholder implementation and may need to be adjusted
  * based on the specific characteristics of the temperature sensor.
  */
-float calculateTemperature(float vtemp) {
-    return vtemp; // I have to still calibrate the temperature measurements
+int calculateTemperature(float vtemp) {
+    return int(vtemp+20); // I have to still calibrate the temperature measurements
 }
 
 /**
@@ -145,16 +151,13 @@ float calculateTemperature(float vtemp) {
  * It also handles the continuous advertising of the Bluetooth beacon.
  */
 void loop() {
-    SensorData sensorData = readSensor();
-    
+    sensorData = readSensor();
     Serial.print("Ozone concentration: ");
     Serial.print(sensorData.ozonePPM);
     Serial.println(" ppm");
     Serial.print("Temperature: ");
     Serial.print(sensorData.temperature);
     Serial.println(" °C");
-    
-    startAdvertising(sensorData);
     
     delay(1000);
 }
