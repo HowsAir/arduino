@@ -10,7 +10,7 @@
  * 
  * @author Manuel Antonio Borregales Perez
  * @author Jordi Bataller Mascarell
- * @date 2024-09-23
+ * @date 2024-09-30
  */
 class SerialPort {
 public:
