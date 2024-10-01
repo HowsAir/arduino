@@ -3,6 +3,17 @@
 #define SENSOR_H
 
 /**
+ * @class Sensor
+ * @brief A class to manage sensor reading and calibration
+ * 
+ * This class provides methods to read and calibrate measures from the gas sensor
+ * 
+ * @author Manuel Antonio Borregales Perez
+ * @author Jordi Bataller Mascarell
+ * @date 2024-09-30
+ */
+
+/**
  * @struct SensorData
  * @brief Structure to hold sensor measurements
  */
