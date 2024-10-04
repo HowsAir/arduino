@@ -1,0 +1,26 @@
+\doxysection{Publisher.\+h}
+\hypertarget{_publisher_8h_source}{}\label{_publisher_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PUBLISHER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PUBLISHER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}BLETransmitter.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Sensor.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_publisher}{Publisher}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_b_l_e_transmitter}{BLETransmitter}}\&\ transmitter;\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_sensor}{Sensor}}\&\ sensor;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_publisher_a8d433ae9d34df1693fafc54ff5977123}{Publisher}}(\mbox{\hyperlink{class_b_l_e_transmitter}{BLETransmitter}}\&\ ble,\ \mbox{\hyperlink{class_sensor}{Sensor}}\&\ sen)\ :\ transmitter(ble),\ sensor(sen)\ \{\}\ \textcolor{comment}{//\ this.transmitter\ =\ ble,\ this.sensor\ =\ sen}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_publisher_af139a4ab968daa9e7c705d557a3b0663}{publishData}}()\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_sensor_data}{SensorData}}\ data\ =\ sensor.\mbox{\hyperlink{class_sensor_acb8c39a8a9c8816dddbec97f09995f92}{measureData}}();}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ transmitter.\mbox{\hyperlink{class_b_l_e_transmitter_a73d2c4e77326a33704718389b098f09e}{broadcastIBeaconAdvertisement}}(data.\mbox{\hyperlink{struct_sensor_data_af955682d9da01c37bd3fe1a5c3383760}{ozonePPM}},\ data.\mbox{\hyperlink{struct_sensor_data_afbfc29d3f1f01a4550de114f88e9a6bf}{temperature}},\ 73);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

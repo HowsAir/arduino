@@ -20,6 +20,7 @@
 
 SerialPort port(115200);
 BLETransmitter transmitter("ManusBeacon", 0x004c, 4);
+// These are the 3 pins for the gas sensor and its unique key sensitivity code
 Sensor sensor(5, 28, 29, -35.35);
 Publisher publisher(transmitter, sensor);
 

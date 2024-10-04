@@ -1,0 +1,31 @@
+\doxysection{Serial\+Port.\+h}
+\hypertarget{_serial_port_8h_source}{}\label{_serial_port_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ SerialPort.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ SERIAL\_PORT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ SERIAL\_PORT\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_serial_port}{SerialPort}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_serial_port_a6f751fb659e3cef9ccbf6c892f92ff10}{SerialPort}}(\textcolor{keywordtype}{long}\ baudRate)\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ Serial.begin(baudRate);}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_serial_port_a592934a1e1bf25967ff48a8327849932}{waitForAvailable}}()\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!Serial)\ delay(10);}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_serial_port_a42637a4512ee77d0ab4bdbd10b82eeeb}{write}}(T\ message)\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ Serial.print(message);}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_serial_port_a1c1a2e88e985293a8b3d813103a49fb1}{writeLine}}(T\ message)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Serial.println(message);}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,85 @@
+\doxysection{BLETransmitter Class Reference}
+\hypertarget{class_b_l_e_transmitter}{}\label{class_b_l_e_transmitter}\index{BLETransmitter@{BLETransmitter}}
+
+
+A class to manage BLE transmission.  
+
+
+
+
+{\ttfamily \#include $<$BLETransmitter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_b_l_e_transmitter_a505e4178c62d6da996fcca57d2442651}{BLETransmitter}} (const char \texorpdfstring{$\ast$}{*}name, uint16\+\_\+t manufacturer, int8\+\_\+t power)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_b_l_e_transmitter}{BLETransmitter}. \end{DoxyCompactList}\item 
+\Hypertarget{class_b_l_e_transmitter_aeb00edb92ae71e7079b258ca5ae7913a}\label{class_b_l_e_transmitter_aeb00edb92ae71e7079b258ca5ae7913a} 
+void {\bfseries turn\+On\+Transmitter} ()
+\begin{DoxyCompactList}\small\item\em Turn on the BLE transmitter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_l_e_transmitter_a73d2c4e77326a33704718389b098f09e}{broadcast\+IBeacon\+Advertisement}} (int16\+\_\+t major, int16\+\_\+t minor, int8\+\_\+t rssi)
+\begin{DoxyCompactList}\small\item\em Broadcast an i\+Beacon advertisement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to manage BLE transmission. 
+
+This class provides methods to initialize and use BLE for transmitting data.
+
+\begin{DoxyAuthor}{Author}
+Manuel Antonio Borregales Perez 
+
+Jordi Bataller Mascarell 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2024-\/09-\/30 
+\end{DoxyDate}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_b_l_e_transmitter_a505e4178c62d6da996fcca57d2442651}\index{BLETransmitter@{BLETransmitter}!BLETransmitter@{BLETransmitter}}
+\index{BLETransmitter@{BLETransmitter}!BLETransmitter@{BLETransmitter}}
+\doxysubsubsection{\texorpdfstring{BLETransmitter()}{BLETransmitter()}}
+{\footnotesize\ttfamily \label{class_b_l_e_transmitter_a505e4178c62d6da996fcca57d2442651} 
+BLETransmitter\+::\+BLETransmitter (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{uint16\+\_\+t}]{manufacturer}{, }\item[{int8\+\_\+t}]{power}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{class_b_l_e_transmitter}{BLETransmitter}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the BLE transmitter \\
+\hline
+{\em manufacturer} & The manufacturer ID \\
+\hline
+{\em power} & The transmission power \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_b_l_e_transmitter_a73d2c4e77326a33704718389b098f09e}\index{BLETransmitter@{BLETransmitter}!broadcastIBeaconAdvertisement@{broadcastIBeaconAdvertisement}}
+\index{broadcastIBeaconAdvertisement@{broadcastIBeaconAdvertisement}!BLETransmitter@{BLETransmitter}}
+\doxysubsubsection{\texorpdfstring{broadcastIBeaconAdvertisement()}{broadcastIBeaconAdvertisement()}}
+{\footnotesize\ttfamily \label{class_b_l_e_transmitter_a73d2c4e77326a33704718389b098f09e} 
+void BLETransmitter\+::broadcast\+IBeacon\+Advertisement (\begin{DoxyParamCaption}\item[{int16\+\_\+t}]{major}{, }\item[{int16\+\_\+t}]{minor}{, }\item[{int8\+\_\+t}]{rssi}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broadcast an i\+Beacon advertisement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em major} & The major value for the i\+Beacon which will be the {\itshape ppm} obtained \\
+\hline
+{\em minor} & The minor value for the i\+Beacon which will be the {\itshape temperature} obtained \\
+\hline
+{\em rssi} & The RSSI value for the i\+Beacon, always the same \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+BLETransmitter.\+h\end{DoxyCompactItemize}

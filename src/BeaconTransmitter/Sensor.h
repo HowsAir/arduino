@@ -68,9 +68,9 @@ public:
      * @return SensorData struct containing ozone and temperature measurements
      */
     SensorData measureData() {
-        float vgas = analogRead(PIN_VGAS) * (3.3 / 4096);
-        float vref = analogRead(PIN_VREF) * (3.3 / 4096);
-        float vtemp = analogRead(PIN_VTEMP) * (3.3 / 4096);
+        float vgas = analogRead(PIN_VGAS) * (3.3 / 1023);
+        float vref = analogRead(PIN_VREF) * (3.3 / 1023);
+        float vtemp = analogRead(PIN_VTEMP) * (3.3 / 1023);
 
         SensorData data;
         data.ozonePPM = calculateOzone(vgas, vref);
@@ -87,7 +87,11 @@ private:
      * @return Ozone concentration in PPM
      */
     int calculateOzone(float vgas, float vref) {
-        return int(50 - ((vgas - vref) / m));
+        int ozone = (vgas - vref) / m)
+        if(ozone < 0) {
+          ozone = ozone * (-1) // pending calibration
+        }
+        return int(ozone*10);
     }
 
     /**
@@ -96,7 +100,7 @@ private:
      * @return Temperature in degrees Celsius
      */
     int calculateTemperature(float vtemp) {
-        return int(vtemp + 20); // Pending calibration
+        return int(vtemp*10); // Pending calibration
     }
 };
 

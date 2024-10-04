@@ -1,0 +1,63 @@
+\doxysection{Sensor.\+h}
+\hypertarget{_sensor_8h_source}{}\label{_sensor_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Sensor.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ SENSOR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ SENSOR\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sensor_data}{SensorData}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_sensor_data_af955682d9da01c37bd3fe1a5c3383760}{ozonePPM}};\ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_sensor_data_afbfc29d3f1f01a4550de114f88e9a6bf}{temperature}};\ }
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sensor}{Sensor}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PIN\_VGAS;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PIN\_VREF;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ PIN\_VTEMP;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ SENSITIVITY\_CODE;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ TIA\_GAIN;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ m;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_sensor_a4f07122a8eb67161a9163588af79fb13}{Sensor}}(\textcolor{keywordtype}{int}\ pinVgas,\ \textcolor{keywordtype}{int}\ pinVref,\ \textcolor{keywordtype}{int}\ pinVtemp,\ \textcolor{keywordtype}{float}\ sensitivityCode)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ :\ PIN\_VGAS(pinVgas),\ PIN\_VREF(pinVref),\ PIN\_VTEMP(pinVtemp),}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ SENSITIVITY\_CODE(sensitivityCode),\ TIA\_GAIN(499),}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ m(SENSITIVITY\_CODE\ *\ TIA\_GAIN\ *\ 1e-\/9\ *\ 1e3)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sensor_afcf8a09f0eed8ce4674b462a287fa3ba}{initializeSensor}}()\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ pinMode(PIN\_VGAS,\ INPUT);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ pinMode(PIN\_VREF,\ INPUT);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ pinMode(PIN\_VTEMP,\ INPUT);}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{struct_sensor_data}{SensorData}}\ \mbox{\hyperlink{class_sensor_acb8c39a8a9c8816dddbec97f09995f92}{measureData}}()\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ vgas\ =\ analogRead(PIN\_VGAS)\ *\ (3.3\ /\ 1023);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ vref\ =\ analogRead(PIN\_VREF)\ *\ (3.3\ /\ 1023);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ vtemp\ =\ analogRead(PIN\_VTEMP)\ *\ (3.3\ /\ 1023);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_sensor_data}{SensorData}}\ data;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ data.\mbox{\hyperlink{struct_sensor_data_af955682d9da01c37bd3fe1a5c3383760}{ozonePPM}}\ =\ calculateOzone(vgas,\ vref);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ data.\mbox{\hyperlink{struct_sensor_data_afbfc29d3f1f01a4550de114f88e9a6bf}{temperature}}\ =\ calculateTemperature(vtemp);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ calculateOzone(\textcolor{keywordtype}{float}\ vgas,\ \textcolor{keywordtype}{float}\ vref)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ ozone\ =\ (vgas\ -\/\ vref)\ /\ m)}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(ozone\ <\ 0)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ ozone\ =\ ozone\ *\ (-\/1)\ \textcolor{comment}{//\ pending\ calibration}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ int(ozone*10);}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ calculateTemperature(\textcolor{keywordtype}{float}\ vtemp)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ int(vtemp*10);\ \textcolor{comment}{//\ Pending\ calibration}}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
