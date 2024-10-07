@@ -87,9 +87,9 @@ private:
      * @return Ozone concentration in PPM
      */
     int calculateOzone(float vgas, float vref) {
-        int ozone = (vgas - vref) / m)
+        int ozone = (vgas - vref) / m;
         if(ozone < 0) {
-          ozone = ozone * (-1) // pending calibration
+          ozone = ozone*(-1); // pending calibration
         }
         return int(ozone*10);
     }
