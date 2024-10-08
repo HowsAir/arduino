@@ -15,7 +15,10 @@
 class SerialPort {
 public:
     /**
-     * @brief Constructor for SerialPort
+     * @brief Constructor for SerialPort, starts the serial.
+     *
+     *    Natural:baudRate ---> Constructor() 
+     *
      * @param baudRate The baud rate for serial communication
      */
     SerialPort(long baudRate) {
@@ -31,6 +34,9 @@ public:
 
     /**
      * @brief Write a message to the serial port
+     *
+     *    Texto:message ---> write()
+     *
      * @param message The message to be written
      */
     template<typename T>
@@ -40,6 +46,9 @@ public:
 
     /**
      * @brief Write a message to the serial port followed by a newline
+     *
+     *    Texto:message ---> writeLine()
+     *
      * @param message The message to be written
      */
     template<typename T>

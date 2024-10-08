@@ -7,6 +7,7 @@
  * @brief A class to manage sensor reading and calibration
  * 
  * This class provides methods to read and calibrate measures from the gas sensor
+ * via analogReadings with 10 bytes of precision at PIN VGAS, PIN VREF and PIN VTEMP
  * 
  * @author Manuel Antonio Borregales Perez
  * @author Jordi Bataller Mascarell
@@ -43,6 +44,12 @@ private:
 public:
     /**
      * @brief Constructor for Sensor
+     *
+     *    Natural:pinVgas
+     *    Natural:pinVref   ---> Constructor()   
+     *    Natural:pinVtemp
+     *    Real:sensitivityCode
+     *
      * @param pinVgas Pin for gas voltage
      * @param pinVref Pin for reference voltage
      * @param pinVtemp Pin for temperature voltage
@@ -65,6 +72,9 @@ public:
 
     /**
      * @brief Measure sensor data
+     *
+     *    measureData() ---> SensorData:[Natural:ozonePPM, Natural:temperature]
+     *
      * @return SensorData struct containing ozone and temperature measurements
      */
     SensorData measureData() {
@@ -82,6 +92,10 @@ public:
 private:
     /**
      * @brief Calculate ozone concentration
+     *
+     *    Real:vgas ---> calculateOzone() ---> Natural
+     *    Real:vref
+     *
      * @param vgas Gas voltage
      * @param vref Reference voltage
      * @return Ozone concentration in PPM
@@ -96,6 +110,9 @@ private:
 
     /**
      * @brief Calculate temperature
+     *
+     *    Real:vtemp ---> calculateTemperature() ---> Natural
+     *
      * @param vtemp Temperature voltage
      * @return Temperature in degrees Celsius
      */

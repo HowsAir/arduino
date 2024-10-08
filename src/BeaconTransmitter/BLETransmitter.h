@@ -24,6 +24,11 @@ private:
 public:
     /**
      * @brief Constructor for BLETransmitter
+     *
+     *    Texto:name
+     *    Natural:manuFacturer ---> Constructor()
+     *    Natural:power
+     *
      * @param name The name of the BLE transmitter
      * @param manufacturer The manufacturer ID
      * @param power The transmission power
@@ -44,6 +49,11 @@ public:
 
     /**
      * @brief Broadcast an iBeacon advertisement
+     *
+     *    Natural:major
+     *    Natural:minor ---> broadcastIBeaconAdvertisement()
+     *    Natural:rssi
+     *
      * @param major The major value for the iBeacon which will be the *ppm* obtained
      * @param minor The minor value for the iBeacon which will be the *temperature* obtained
      * @param rssi The RSSI value for the iBeacon, always the same

@@ -22,6 +22,10 @@ private:
 public:
     /**
      * @brief Constructor for Publisher
+     *
+     *    BLETransmitter:ble
+     *        Sensor:sen      ---> Constructor()
+     *
      * @param ble Reference to BLETransmitter object
      * @param sen Reference to Sensor object
      */
