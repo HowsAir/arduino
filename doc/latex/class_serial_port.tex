@@ -1,0 +1,96 @@
+\doxysection{Serial\+Port Class Reference}
+\hypertarget{class_serial_port}{}\label{class_serial_port}\index{SerialPort@{SerialPort}}
+
+
+A class to manage serial communication.  
+
+
+
+
+{\ttfamily \#include $<$Serial\+Port.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_serial_port_a6f751fb659e3cef9ccbf6c892f92ff10}{Serial\+Port}} (long baud\+Rate)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_serial_port}{Serial\+Port}. \end{DoxyCompactList}\item 
+\Hypertarget{class_serial_port_a592934a1e1bf25967ff48a8327849932}\label{class_serial_port_a592934a1e1bf25967ff48a8327849932} 
+void {\bfseries wait\+For\+Available} ()
+\begin{DoxyCompactList}\small\item\em Wait for the serial port to become available. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_serial_port_a42637a4512ee77d0ab4bdbd10b82eeeb}{write}} (T message)
+\begin{DoxyCompactList}\small\item\em Write a message to the serial port. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_serial_port_a1c1a2e88e985293a8b3d813103a49fb1}{write\+Line}} (T message)
+\begin{DoxyCompactList}\small\item\em Write a message to the serial port followed by a newline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to manage serial communication. 
+
+This class provides methods to initialize and use the serial port for communication.
+
+\begin{DoxyAuthor}{Author}
+Manuel Antonio Borregales Perez 
+
+Jordi Bataller Mascarell 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2024-\/09-\/30 
+\end{DoxyDate}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_serial_port_a6f751fb659e3cef9ccbf6c892f92ff10}\index{SerialPort@{SerialPort}!SerialPort@{SerialPort}}
+\index{SerialPort@{SerialPort}!SerialPort@{SerialPort}}
+\doxysubsubsection{\texorpdfstring{SerialPort()}{SerialPort()}}
+{\footnotesize\ttfamily \label{class_serial_port_a6f751fb659e3cef9ccbf6c892f92ff10} 
+Serial\+Port\+::\+Serial\+Port (\begin{DoxyParamCaption}\item[{long}]{baud\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{class_serial_port}{Serial\+Port}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em baud\+Rate} & The baud rate for serial communication \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_serial_port_a42637a4512ee77d0ab4bdbd10b82eeeb}\index{SerialPort@{SerialPort}!write@{write}}
+\index{write@{write}!SerialPort@{SerialPort}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily \label{class_serial_port_a42637a4512ee77d0ab4bdbd10b82eeeb} 
+template$<$typename T $>$ \\
+void Serial\+Port\+::write (\begin{DoxyParamCaption}\item[{T}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write a message to the serial port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to be written \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_serial_port_a1c1a2e88e985293a8b3d813103a49fb1}\index{SerialPort@{SerialPort}!writeLine@{writeLine}}
+\index{writeLine@{writeLine}!SerialPort@{SerialPort}}
+\doxysubsubsection{\texorpdfstring{writeLine()}{writeLine()}}
+{\footnotesize\ttfamily \label{class_serial_port_a1c1a2e88e985293a8b3d813103a49fb1} 
+template$<$typename T $>$ \\
+void Serial\+Port\+::write\+Line (\begin{DoxyParamCaption}\item[{T}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write a message to the serial port followed by a newline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to be written \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Serial\+Port.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\doxysection{Sensor Class Reference}
+\hypertarget{class_sensor}{}\label{class_sensor}\index{Sensor@{Sensor}}
+
+
+A class to manage sensor reading and calibration.  
+
+
+
+
+{\ttfamily \#include $<$Sensor.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sensor_a4f07122a8eb67161a9163588af79fb13}{Sensor}} (int pin\+Vgas, int pin\+Vref, int pin\+Vtemp, float sensitivity\+Code)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_sensor}{Sensor}. \end{DoxyCompactList}\item 
+\Hypertarget{class_sensor_afcf8a09f0eed8ce4674b462a287fa3ba}\label{class_sensor_afcf8a09f0eed8ce4674b462a287fa3ba} 
+void {\bfseries initialize\+Sensor} ()
+\begin{DoxyCompactList}\small\item\em Initialize the sensor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} \mbox{\hyperlink{class_sensor_acb8c39a8a9c8816dddbec97f09995f92}{measure\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Measure sensor data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class to manage sensor reading and calibration. 
+
+A class to manage sensor operations.
+
+This class provides methods to read and calibrate measures from the gas sensor
+
+\begin{DoxyAuthor}{Author}
+Manuel Antonio Borregales Perez 
+
+Jordi Bataller Mascarell 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2024-\/09-\/30
+\end{DoxyDate}
+This class provides methods to initialize and read data from the sensor.
+
+\begin{DoxyAuthor}{Author}
+Manuel Antonio Borregales Perez 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2024-\/09-\/30 
+\end{DoxyDate}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_sensor_a4f07122a8eb67161a9163588af79fb13}\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\index{Sensor@{Sensor}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{Sensor()}{Sensor()}}
+{\footnotesize\ttfamily \label{class_sensor_a4f07122a8eb67161a9163588af79fb13} 
+Sensor\+::\+Sensor (\begin{DoxyParamCaption}\item[{int}]{pin\+Vgas}{, }\item[{int}]{pin\+Vref}{, }\item[{int}]{pin\+Vtemp}{, }\item[{float}]{sensitivity\+Code}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{class_sensor}{Sensor}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin\+Vgas} & Pin for gas voltage \\
+\hline
+{\em pin\+Vref} & Pin for reference voltage \\
+\hline
+{\em pin\+Vtemp} & Pin for temperature voltage \\
+\hline
+{\em sensitivity\+Code} & Sensitivity code of the sensor \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sensor_acb8c39a8a9c8816dddbec97f09995f92}\index{Sensor@{Sensor}!measureData@{measureData}}
+\index{measureData@{measureData}!Sensor@{Sensor}}
+\doxysubsubsection{\texorpdfstring{measureData()}{measureData()}}
+{\footnotesize\ttfamily \label{class_sensor_acb8c39a8a9c8816dddbec97f09995f92} 
+\mbox{\hyperlink{struct_sensor_data}{Sensor\+Data}} Sensor\+::measure\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Measure sensor data. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_sensor_data}{Sensor\+Data} struct containing ozone and temperature measurements 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Sensor.\+h\end{DoxyCompactItemize}

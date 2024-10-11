@@ -1,0 +1,49 @@
+\doxysection{BLETransmitter.\+h}
+\hypertarget{_b_l_e_transmitter_8h_source}{}\label{_b_l_e_transmitter_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ BLETransmitter.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ BLE\_TRANSMITTER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ BLE\_TRANSMITTER\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <bluefruit.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_b_l_e_transmitter}{BLETransmitter}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ transmitterName;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{const}\ uint16\_t\ manufacturerID;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ int8\_t\ txPower;}
+\DoxyCodeLine{00022\ \ \ \ \ uint8\_t\ beaconUUID[16];}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_b_l_e_transmitter_a505e4178c62d6da996fcca57d2442651}{BLETransmitter}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ uint16\_t\ manufacturer,\ int8\_t\ power)\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ :\ transmitterName(name),\ manufacturerID(manufacturer),\ txPower(power)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ memcpy(beaconUUID,\ \textcolor{stringliteral}{"{}MANU-\/EPSG-\/GTI-\/3A"{}},\ 16);}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_b_l_e_transmitter_aeb00edb92ae71e7079b258ca5ae7913a}{turnOnTransmitter}}()\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ Bluefruit.begin();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Bluefruit.setName(transmitterName);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ Bluefruit.ScanResponse.addName();}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_b_l_e_transmitter_a73d2c4e77326a33704718389b098f09e}{broadcastIBeaconAdvertisement}}(int16\_t\ major,\ int16\_t\ minor,\ int8\_t\ rssi)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.stop();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.addFlags(BLE\_GAP\_ADV\_FLAGS\_LE\_ONLY\_GENERAL\_DISC\_MODE);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.addTxPower();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.addName();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ BLEBeacon\ theBeacon(beaconUUID,\ major,\ minor,\ rssi);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ theBeacon.setManufacturer(manufacturerID);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.setBeacon(theBeacon);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.restartOnDisconnect(\textcolor{keyword}{true});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.setInterval(32,\ 244);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.setFastTimeout(30);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ Bluefruit.Advertising.start(0);}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
