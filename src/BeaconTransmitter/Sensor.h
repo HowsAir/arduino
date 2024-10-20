@@ -38,6 +38,8 @@ private:
     const int PIN_VREF;
     const int PIN_VTEMP;
     const float SENSITIVITY_CODE;
+    const float X_CALIBRATION;
+    const float Y_CALIBRATION;
     const float TIA_GAIN;
     const float m;
 
@@ -49,16 +51,20 @@ public:
      *    Natural:pinVref   ---> Constructor()   
      *    Natural:pinVtemp
      *    Real:sensitivityCode
+     *    Real:X 
+     *    Real:Y
      *
      * @param pinVgas Pin for gas voltage
      * @param pinVref Pin for reference voltage
      * @param pinVtemp Pin for temperature voltage
      * @param sensitivityCode Sensitivity code of the sensor
+     * @param X Calibration value for the ozone reading
+     * @param Y Calibration value for the ozone reading
      */
-    Sensor(int pinVgas, int pinVref, int pinVtemp, float sensitivityCode)
+    Sensor(int pinVgas, int pinVref, int pinVtemp, float sensitivityCode, float X, float Y)
         : PIN_VGAS(pinVgas), PIN_VREF(pinVref), PIN_VTEMP(pinVtemp),
-          SENSITIVITY_CODE(sensitivityCode), TIA_GAIN(499),
-          m(SENSITIVITY_CODE * TIA_GAIN * 1e-9 * 1e3) {
+          SENSITIVITY_CODE(sensitivityCode), X_CALIBRATION(X), Y_CALIBRATION(Y), 
+          TIA_GAIN(499), m(SENSITIVITY_CODE * TIA_GAIN * 1e-9 * 1e3) {
     }
 
     /**
@@ -105,7 +111,7 @@ private:
         if(ozone < 0) {
           ozone = ozone*(-1); // pending calibration
         }
-        return int(ozone*10);
+        return int((ozone*X_CALIBRATION) + Y_CALIBRATION);
     }
 
     /**

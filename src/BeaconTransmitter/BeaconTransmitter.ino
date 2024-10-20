@@ -18,10 +18,16 @@
 #include "Sensor.h"
 #include "Publisher.h"
 
+#define PIN_VGAS = 5
+#define PIN_VREF = 28
+#define PIN_VTEMP = 29
+#define SENSITIVITY_CODE = -35.35
+#define X_CALIBRATION = 0.64
+#define Y_CALIBRATION = -2.56
+
 SerialPort port(115200);
 BLETransmitter transmitter("ManusBeacon", 0x004c, 4);
-// These are the 3 pins for the gas sensor and its unique key sensitivity code
-Sensor sensor(5, 28, 29, -35.35);
+Sensor sensor(PIN_VGAS, PIN_VREF, PIN_VTEMP, SENSITIVITY_CODE, X_CALIBRATION, Y_CALIBRATION);
 Publisher publisher(transmitter, sensor);
 
 void setup() {
