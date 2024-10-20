@@ -1,8 +1,8 @@
-# BreathBetter Arduino Beacon Transmitter
+# HowsAir Arduino Beacon Transmitter
 
 ## Description
 
-BreathBetter is an organization committed to informing users about the true quality of the air they breathe. This Arduino project is part of a larger system that includes an Android app and a Web Page. The Arduino sketch reads air quality data (ozone concentration and temperature) from a ULPSM-O3 968-046 sensor and broadcasts this information via Bluetooth Low Energy (BLE) beacons. This data can then be received and interpreted by Android devices running the BreathBetter app.
+HowsAir is an organization committed to informing users about the true quality of the air they breathe. This Arduino project is part of a larger system that includes an Android app and a Web Page. The Arduino sketch reads air quality data (ozone concentration and temperature) from a ULPSM-O3 968-046 sensor and broadcasts this information via Bluetooth Low Energy (BLE) beacons. This data can then be received and interpreted by Android devices running the HowsAir app.
 
 
 
@@ -44,9 +44,6 @@ void broadcastIBeaconAdvertisement(int16_t major, int16_t minor, int8_t rssi) {
     Bluefruit.Advertising.start(0);
 }
 ```
-
-## Repository
-Link to the BreathBetter Arduino Repository
 
 ## FAQ
 
