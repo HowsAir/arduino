@@ -18,12 +18,12 @@
 #include "Sensor.h"
 #include "Publisher.h"
 
-#define PIN_VGAS = 5
-#define PIN_VREF = 28
-#define PIN_VTEMP = 29
-#define SENSITIVITY_CODE = -35.35
-#define X_CALIBRATION = 0.64
-#define Y_CALIBRATION = -2.56
+#define PIN_VGAS 5
+#define PIN_VREF 28
+#define PIN_VTEMP 29
+#define SENSITIVITY_CODE -35.35
+#define X_CALIBRATION 0.64
+#define Y_CALIBRATION -2.56
 
 SerialPort port(115200);
 BLETransmitter transmitter("ManusBeacon", 0x004c, 4);
