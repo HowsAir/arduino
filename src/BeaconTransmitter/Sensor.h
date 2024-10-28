@@ -108,10 +108,11 @@ private:
      */
     int calculateOzone(float vgas, float vref) {
         int ozone = (vgas - vref) / m;
+        ozone = (ozone*X_CALIBRATION) + Y_CALIBRATION;
         if(ozone < 0) {
           ozone = ozone*(-1); // pending calibration
         }
-        return int((ozone*X_CALIBRATION) + Y_CALIBRATION);
+        return ozone;
     }
 
     /**
