@@ -41,23 +41,21 @@ public:
     /**
      * @brief Turn on the BLE transmitter
      */
-    void turnOnTransmitter() {
+     void turnOnTransmitter() {
         Bluefruit.begin();
         Bluefruit.setName(transmitterName);
+        Bluefruit.setTxPower(txPower);
+        
+        // Configurar advertising
+        Bluefruit.Advertising.clearData();
+        Bluefruit.ScanResponse.clearData();
         Bluefruit.ScanResponse.addName();
+
+        // Configurar scanner para operar simultáneamente
+        Bluefruit.Scanner.setInterval(1000, 100);   // Intervalo de escaneo
+        Bluefruit.Scanner.useActiveScan(true);      // Solicitar más información
     }
 
-    /**
-     * @brief Broadcast an iBeacon advertisement
-     *
-     *    Natural:major
-     *    Natural:minor ---> broadcastIBeaconAdvertisement()
-     *    Natural:rssi
-     *
-     * @param major The major value for the iBeacon which will be the *ppm* obtained
-     * @param minor The minor value for the iBeacon which will be the *temperature* obtained
-     * @param rssi The RSSI value for the iBeacon, always the same
-     */
     void broadcastIBeaconAdvertisement(int16_t major, int16_t minor, int8_t rssi) {
         Bluefruit.Advertising.stop();
         
