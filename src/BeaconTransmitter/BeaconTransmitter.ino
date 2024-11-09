@@ -36,6 +36,7 @@ Zumbador zumbador(3);
 bool buzzerActive = false;
 unsigned long lastBuzzerTime = 0;
 const unsigned long BUZZER_COOLDOWN = 2000;
+
 // Helper function to print hex values
 void printHex(SerialPort& port, uint8_t num) {
     if (num < 16) {
@@ -55,23 +56,21 @@ void scan_callback(ble_gap_evt_adv_report_t* report) {
         sizeof(buffer)
     );
 
-    // Procesar solo los anuncios que cumplen con los criterios de longitud y contenido
+    // Procesar solo los anuncios que cumplen con los criterios
     if (len == 5 && buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0xBE && buffer[3] == 0xEE) {
         port.writeLine("Valid buzzer command identifier received!");
 
         uint8_t command = buffer[4];
-        if (command == 0x01 && !buzzerActive) { 
-            buzzerActive = true;
-            lastBuzzerTime = millis();
+        if (command == 0x01) { 
             zumbador.activar();
-            buzzerActive = false;
+        } else if (command == 0x00) {
+            zumbador.desactivar();
         }
     }
 
-    // Continuar escaneando para recibir otros datos relevantes
+    // Continuar escaneando
     Bluefruit.Scanner.resume();
 }
-
 
 void setup() {
     port.waitForAvailable();
@@ -91,16 +90,16 @@ void setup() {
     
     sensor.initializeSensor();
     
-    // Configure BLE scanner with improved parameters
     Bluefruit.Scanner.setRxCallback(scan_callback);
     // Scan more frequently: interval = 100ms, window = 50ms
-    Bluefruit.Scanner.setInterval(80, 40);  // More aggressive scanning
+    Bluefruit.Scanner.setInterval(80, 40);
     Bluefruit.Scanner.useActiveScan(true);
     Bluefruit.Scanner.start(0);
     
     port.writeLine("Scanner initialized for buzzer commands");
     publisher.publishData();
 }
+
 
 void loop() {
     // Medir los datos del sensor
@@ -114,10 +113,7 @@ void loop() {
 
     publisher.publishData();
     
-    // Esperar para evitar activaciones múltiples del zumbador
-    if (millis() - lastBuzzerTime >= BUZZER_COOLDOWN) {
-        buzzerActive = false;
-    }
+    zumbador.update();
 
     delay(1000);
 }
