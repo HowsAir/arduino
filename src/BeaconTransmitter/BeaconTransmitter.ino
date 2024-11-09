@@ -10,7 +10,7 @@
  * @author Alejandro Rosado Jiménez
  * @author Jordi Bataller Mascarell
  * @date 2024-09-30
- * last edited 2024-11-08
+ * last edited 2024-11-09
  */
 
 #include "SerialPort.h"
@@ -47,6 +47,17 @@ void printHex(SerialPort& port, uint8_t num) {
     port.write(hex);
 }
 
+
+/**
+ * @brief Callback function for handling BLE scan reports
+ * 
+ * This function processes BLE advertisement reports received during scanning. 
+ * It parses the report to check for manufacturer-specific data, and if the 
+ * data matches a specific pattern, it identifies it as a valid buzzer command. 
+ * Depending on the command byte, it activates or deactivates the buzzer.
+ * 
+ * @param report Pointer to the BLE advertisement report
+ */
 void scan_callback(ble_gap_evt_adv_report_t* report) {
     uint8_t buffer[32];
     uint8_t len = Bluefruit.Scanner.parseReportByType(
@@ -56,7 +67,7 @@ void scan_callback(ble_gap_evt_adv_report_t* report) {
         sizeof(buffer)
     );
 
-    // Procesar solo los anuncios que cumplen con los criterios
+    // Process only advertisements that meet specific criteria
     if (len == 5 && buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0xBE && buffer[3] == 0xEE) {
         port.writeLine("Valid buzzer command identifier received!");
 
@@ -68,7 +79,7 @@ void scan_callback(ble_gap_evt_adv_report_t* report) {
         }
     }
 
-    // Continuar escaneando
+    // Resume scanning to continue receiving advertisements
     Bluefruit.Scanner.resume();
 }
 
@@ -102,7 +113,7 @@ void setup() {
 
 
 void loop() {
-    // Medir los datos del sensor
+    // Measure sensor data
     SensorData data = sensor.measureData();
     port.write("Ozone concentration: ");
     port.write(data.ozonePPM);
