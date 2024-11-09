@@ -6,10 +6,13 @@
  * @class Zumbador
  * @brief A class to control a buzzer connected to the Arduino
  * 
+ * This class provides methods to initialize, activate, deactivate, 
+ * and update the state of a buzzer that plays a melody. It controls 
+ * timing between notes and loops through a predefined melody.
  * 
- * 
- * @author Alejandro Rosado Jiméez
+ * @author Alejandro Rosado Jiménez
  * @date 2024-11-08
+ * last updated: 2024-11-09
  */
 class Zumbador {
 private:
@@ -30,7 +33,8 @@ public:
     /**
      * @brief Constructor for Zumbador
      * 
-     * 
+     * Initializes the buzzer with the specified pin number and
+     * sets the initial state to inactive.
      * 
      * @param pin The pin number for the buzzer
      */
@@ -39,7 +43,8 @@ public:
     /**
      * @brief Initialize the buzzer
      * 
-     * 
+     * Sets up the pin as an output and prepares the buzzer to play
+     * without starting the melody.
      */
     void iniciar() {
         pinMode(pin, OUTPUT);
@@ -50,19 +55,33 @@ public:
     /**
      * @brief Activate the buzzer
      * 
-     * 
-     *
+     * Starts playing the melody by setting the initial note 
+     * and marking the buzzer as active.
      */
     void activar() {
         isPlaying = true;
         currentNote = 0;
         lastNoteTime = millis();
     }
+
+    /**
+     * @brief Deactivate the buzzer
+     * 
+     * Stops the buzzer by turning off the tone and marking
+     * the buzzer as inactive.
+     */
     void desactivar() {
         isPlaying = false;
         noTone(pin);
     }
 
+    /**
+     * @brief Update the buzzer's state
+     * 
+     * Checks if it's time to move to the next note in the melody. 
+     * If the buzzer is active, this method advances to the next 
+     * note based on the timing specified in noteDurations.
+     */
     void update() {
         if (!isPlaying) return;
 
@@ -78,6 +97,11 @@ public:
         }
     }
 
+    /**
+     * @brief Check if the buzzer is active
+     * 
+     * @return true if the buzzer is currently playing, false otherwise
+     */
     bool estaActivo() {
         return isPlaying;
     }
