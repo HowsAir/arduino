@@ -55,7 +55,7 @@ public:
         Bluefruit.Scanner.setInterval(1000, 100);   // Intervalo de escaneo
         Bluefruit.Scanner.useActiveScan(true);      // Solicitar más información
     }
-    }
+
 
     /**
      * @brief Broadcast an iBeacon advertisement
