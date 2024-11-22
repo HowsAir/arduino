@@ -37,6 +37,11 @@ bool buzzerActive = false;
 unsigned long lastBuzzerTime = 0;
 const unsigned long BUZZER_COOLDOWN = 2000;
 
+unsigned long lastPublishTime = 0;
+unsigned long lastBuzzerUpdateTime = 0;
+const unsigned long PUBLISH_INTERVAL = 1000;  // 1 second
+const unsigned long BUZZER_UPDATE_INTERVAL = 50;  // 10 times per second
+
 // Helper function to print hex values
 void printHex(SerialPort& port, uint8_t num) {
     if (num < 16) {
@@ -113,18 +118,29 @@ void setup() {
 
 
 void loop() {
-    // Measure sensor data
-    SensorData data = sensor.measureData();
-    port.write("Ozone concentration: ");
-    port.write(data.ozonePPM);
-    port.writeLine(" ppm");
-    port.write("Temperature: ");
-    port.write(data.temperature);
-    port.writeLine(" °C");
-
-    publisher.publishData();
+   unsigned long currentMillis = millis();
     
-    zumbador.update();
+    // Update buzzer more frequently
+    if (currentMillis - lastBuzzerUpdateTime >= BUZZER_UPDATE_INTERVAL) {
+        zumbador.update();
+        lastBuzzerUpdateTime = currentMillis;
+    }
 
-    delay(1000);
+    // Publish data less frequently
+    if (currentMillis - lastPublishTime >= PUBLISH_INTERVAL) {
+        // Measure sensor data
+        SensorData data = sensor.measureData();
+        port.write("Ozone concentration: ");
+        port.write(data.ozonePPM);
+        port.writeLine(" ppm");
+        port.write("Temperature: ");
+        port.write(data.temperature);
+        port.writeLine(" °C");
+
+        publisher.publishData();
+        lastPublishTime = currentMillis;
+    }
+
+    // A small delay to prevent overwhelming the CPU
+    delay(10);
 }
