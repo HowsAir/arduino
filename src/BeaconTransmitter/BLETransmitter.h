@@ -41,11 +41,21 @@ public:
     /**
      * @brief Turn on the BLE transmitter
      */
-    void turnOnTransmitter() {
+     void turnOnTransmitter() {
         Bluefruit.begin();
         Bluefruit.setName(transmitterName);
+        Bluefruit.setTxPower(txPower);
+        
+        // Configurar advertising
+        Bluefruit.Advertising.clearData();
+        Bluefruit.ScanResponse.clearData();
         Bluefruit.ScanResponse.addName();
+
+        // Configurar scanner para operar simultáneamente
+        Bluefruit.Scanner.setInterval(1000, 100);   // Intervalo de escaneo
+        Bluefruit.Scanner.useActiveScan(true);      // Solicitar más información
     }
+
 
     /**
      * @brief Broadcast an iBeacon advertisement
