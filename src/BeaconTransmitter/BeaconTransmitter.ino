@@ -74,7 +74,7 @@ void scan_callback(ble_gap_evt_adv_report_t* report) {
 
     // Process only advertisements that meet specific criteria
     if (len == 5 && buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0xBE && buffer[3] == 0xEE) {
-        port.writeLine("Valid buzzer command identifier received!");
+        //port.writeLine("Valid buzzer command identifier received!");
 
         uint8_t command = buffer[4];
         if (command == 0x01) { 
@@ -89,20 +89,20 @@ void scan_callback(ble_gap_evt_adv_report_t* report) {
 }
 
 void setup() {
-    port.waitForAvailable();
+    //port.waitForAvailable();
     
-    port.writeLine("-----------------------");
-    port.writeLine(" iBeacon TESTS  ");
-    port.writeLine("-----------------------");
+    //port.writeLine("-----------------------");
+    //port.writeLine(" iBeacon TESTS  ");
+    //port.writeLine("-----------------------");
     
     // Initialize the buzzer first
     zumbador.iniciar();
     digitalWrite(3, LOW);
     
-    port.writeLine("Initializing the Bluefruit nRF52 module");
+    //port.writeLine("Initializing the Bluefruit nRF52 module");
     transmitter.turnOnTransmitter();
     
-    port.writeLine("Setting Device Name to ManusBeacon");
+    //port.writeLine("Setting Device Name to ManusBeacon");
     
     sensor.initializeSensor();
     
@@ -112,7 +112,7 @@ void setup() {
     Bluefruit.Scanner.useActiveScan(true);
     Bluefruit.Scanner.start(0);
     
-    port.writeLine("Scanner initialized for buzzer commands");
+    //port.writeLine("Scanner initialized for buzzer commands");
     publisher.publishData();
 }
 
@@ -130,12 +130,12 @@ void loop() {
     if (currentMillis - lastPublishTime >= PUBLISH_INTERVAL) {
         // Measure sensor data
         SensorData data = sensor.measureData();
-        port.write("Ozone concentration: ");
-        port.write(data.ozonePPM);
-        port.writeLine(" ppm");
-        port.write("Temperature: ");
-        port.write(data.temperature);
-        port.writeLine(" °C");
+        //port.write("Ozone concentration: ");
+        //port.write(data.ozonePPM);
+        //port.writeLine(" ppm");
+        //port.write("Temperature: ");
+        //port.write(data.temperature);
+        //port.writeLine(" °C");
 
         publisher.publishData();
         lastPublishTime = currentMillis;
