@@ -142,5 +142,5 @@ void loop() {
     }
 
     // A small delay to prevent overwhelming the CPU
-    delay(100);
+    delay(250);
 }
